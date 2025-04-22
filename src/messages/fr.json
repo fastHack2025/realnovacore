@@ -1,0 +1,11 @@
+{
+  "title": "Bienvenue sur DL Solutions",
+  "cta": "Commencer maintenant",
+  "modules": {
+    "title": "Nos Modules Intelligents",
+    "assistant": "Assistant IA",
+    "crm": "Suivi client CRM",
+    "rdv": "Prise de rendez-vous",
+    "formations": "Formations Pro"
+  }
+}
