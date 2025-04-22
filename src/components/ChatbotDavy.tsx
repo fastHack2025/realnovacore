@@ -1,47 +1,44 @@
-'use client';
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { SendHorizonal, MessageCircle } from "lucide-react";
 
 export default function ChatbotDavy() {
   const [visible, setVisible] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<string[]>(["Bonjour je suis Davy, puis-je t'aider ?"]);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState<string[]>([]);
+  const [input, setInput] = useState("");
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setVisible(true), 20000); // Apparaît après 20s
-    return () => clearTimeout(timeout);
+    const timer = setTimeout(() => setVisible(true), 20000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    if (visible) {
+      setMessages(["🤖 Davy : Bonjour je suis Davy, puis-je t'aider ?"]);
+    }
+  }, [visible]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage = input.trim();
-    const updatedMessages = [...messages, `👤 ${userMessage}`];
-    setMessages(updatedMessages);
-    setInput('');
+    const newMessages = [...messages, `👤 ${userMessage}`];
+    setMessages(newMessages);
+    setInput("");
 
-    // ✅ Enregistrer le message utilisateur
     await supabase.from("davy_messages").insert({
-      user_id: null, // Plus tard avec Clerk auth
+      user_id: null,
       role: "user",
       content: userMessage,
     });
 
-    // ✅ Réponse automatique de l'IA simulée
     setTimeout(async () => {
       const aiResponse = "🤖 Davy : Je suis encore en apprentissage mais je vais t'aider au mieux.";
-      const finalMessages = [...updatedMessages, aiResponse];
-      setMessages(finalMessages);
 
-      // ✅ Enregistrer la réponse IA
+      setMessages([...newMessages, aiResponse]);
+
       await supabase.from("davy_messages").insert({
         user_id: null,
         role: "assistant",
@@ -50,47 +47,39 @@ export default function ChatbotDavy() {
     }, 1000);
   };
 
-  return visible ? (
-    <div className="fixed bottom-6 right-6 z-50 text-sm">
-      {expanded ? (
-        <div className="w-80 h-96 bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col">
-          <div className="bg-indigo-600 text-white p-3 rounded-t-xl font-semibold flex justify-between items-center">
-            <span>Davy – Assistant IA</span>
-            <button onClick={() => setExpanded(false)} className="text-white text-lg">×</button>
-          </div>
+  if (!visible) return null;
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-2 text-gray-800">
-            {messages.map((msg, idx) => (
-              <div key={idx} className="whitespace-pre-line">{msg}</div>
-            ))}
-            <div ref={bottomRef} />
-          </div>
-
-          <div className="p-2 border-t flex gap-2">
-            <input
-              className="flex-1 border border-gray-300 px-3 py-2 rounded-md focus:outline-none"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="Écris ici..."
-            />
-            <button
-              className="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700"
-              onClick={sendMessage}
-            >
-              <SendHorizonal size={16} />
-            </button>
-          </div>
-        </div>
-      ) : (
+  return (
+    <div className="fixed bottom-5 right-5 z-40 w-80 max-w-[90vw] bg-white rounded-xl shadow-lg border border-gray-200 animate-fade-in">
+      <div className="flex items-center gap-2 px-4 py-2 border-b bg-indigo-50 rounded-t-xl">
+        <img
+          src="https://res.cloudinary.com/dko5sommz/image/upload/v1744744139/chatbot_la13t1.gif"
+          alt="Davy Bot"
+          className="w-10 h-10 rounded-full"
+        />
+        <p className="font-semibold text-indigo-700">Davy</p>
+      </div>
+      <div ref={chatRef} className="max-h-64 overflow-y-auto px-4 py-2 text-sm space-y-2">
+        {messages.map((msg, idx) => (
+          <p key={idx}>{msg}</p>
+        ))}
+      </div>
+      <div className="flex items-center border-t px-4 py-2">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          placeholder="Écris un message..."
+          className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-full focus:outline-none"
+        />
         <button
-          onClick={() => setExpanded(true)}
-          className="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg flex items-center justify-center animate-bounce"
-          title="Davy – Chatbot IA"
+          onClick={sendMessage}
+          className="ml-2 px-3 py-1 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700"
         >
-          <MessageCircle size={24} />
+          Envoyer
         </button>
-      )}
+      </div>
     </div>
-  ) : null;
+  );
 }
