@@ -1,49 +1,45 @@
-"use client"
+// ✅ Fichier 3 : /src/app/formations/sav/page.tsx
 
-import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+"use client";
 
-export default function SAVFormation() {
+import Link from "next/link";
+import Image from "next/image";
+
+export default function SavPage() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 px-6 py-12">
-      <div className="max-w-4xl mx-auto">
-        <Link href="/formations" className="inline-flex items-center mb-6 text-blue-600 hover:underline">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Retour aux formations
-        </Link>
-
-        <h1 className="text-4xl font-bold text-center mb-4">Formation : Service Après-Vente (SAV)</h1>
-        <p className="text-lg text-center text-gray-600 mb-8">
-          Devenez un expert dans la résolution rapide et humaine des problèmes clients.
+    <main className="min-h-screen px-6 py-16 text-white bg-gradient-to-br from-gray-900 to-black">
+      <div className="max-w-5xl mx-auto text-center">
+        <h1 className="text-4xl font-bold mb-4">🎧 Formation : Service Après-Vente (SAV)</h1>
+        <p className="text-gray-300 mb-8">
+          Apprenez à fidéliser votre clientèle, gérer les réclamations avec professionnalisme et transformer chaque plainte en opportunité commerciale.
         </p>
-
-        <div className="bg-yellow-50 p-6 rounded-2xl shadow-lg mb-10">
-          <h2 className="text-2xl font-semibold mb-4">Objectifs</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-800">
-            <li>Répondre efficacement aux demandes clients</li>
-            <li>Gérer les retours et litiges avec diplomatie</li>
-            <li>Renforcer la fidélité grâce à un SAV performant</li>
+        <div className="bg-white/10 backdrop-blur-xl p-6 rounded-xl border border-white/20 text-left shadow-xl">
+          <h2 className="text-2xl font-semibold text-white mb-4">🎯 Objectifs :</h2>
+          <ul className="list-disc pl-6 text-gray-300 space-y-2 text-sm">
+            <li>Gérer les réclamations avec méthode</li>
+            <li>Transformer les insatisfactions en opportunités</li>
+            <li>Créer un parcours post-achat mémorable</li>
           </ul>
-        </div>
+          <h3 className="text-xl mt-6 font-medium text-white">📅 Durée : 2 semaines</h3>
+          <h3 className="text-xl mb-4 font-medium text-white">💰 Tarif : 200 000 FCFA</h3>
 
-        <div className="bg-white border border-gray-200 p-6 rounded-xl mb-8">
-          <h2 className="text-xl font-semibold mb-3">Programme</h2>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>Réception des plaintes</li>
-            <li>Analyse et typologie des demandes</li>
-            <li>Gestion émotionnelle du client</li>
-            <li>Procédures internes et outils</li>
-            <li>Mesure de la satisfaction post-SAV</li>
-          </ol>
-        </div>
-
-        <div className="text-center">
-          <Button className="text-lg px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full">
-            S’inscrire à la formation
-          </Button>
+          <Link
+            href="/formations/sav/inscription"
+            className="inline-block mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md font-semibold"
+          >
+            S’inscrire maintenant
+          </Link>
         </div>
       </div>
-    </div>
-  )
+
+      <footer className="mt-20 mb-6 text-center text-sm text-white opacity-80">
+        <div className="flex flex-col items-center gap-2">
+          <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1743895989/1_f3thi3.png" alt="DL Solutions" width={60} height={60} className="rounded-full" />
+          <p>© Dave & Luce Solutions — <strong>Samuel OBAM made this</strong></p>
+          <p>📞 +237 694 34 15 86 — +237 620 21 62 17</p>
+          <p>📧 samuelobaml@dlsolutions.com</p>
+        </div>
+      </footer>
+    </main>
+  );
 }

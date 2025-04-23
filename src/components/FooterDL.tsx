@@ -1,32 +1,49 @@
-import Link from "next/link";
+"use client";
+
+import Image from "next/image";
 
 export default function FooterDL() {
   return (
-    <footer className="bg-black text-white py-10 px-6 mt-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h2 className="text-lg font-semibold mb-4">DL Solutions</h2>
-          <p className="text-sm text-gray-400">
-            Agence spécialisée en relation client, CRM, IA & transformation digitale.
-          </p>
+    <footer className="bg-black text-white py-10 px-6 border-t border-white/10 mt-20">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        {/* Logo et signature */}
+        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <Image
+            src="https://res.cloudinary.com/dko5sommz/image/upload/v1743895989/1_f3thi3.png"
+            alt="DL Solutions"
+            width={70}
+            height={70}
+            className="rounded-full border bg-white p-1 shadow"
+          />
+          <p className="text-sm mt-3">© Dave & Luce Solutions</p>
+          <p className="text-xs text-white/60 italic">Samuel OBAM made this</p>
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold mb-4">Navigation</h2>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="/novacore" className="hover:underline">NovaCore</Link></li>
-            <li><Link href="/crm" className="hover:underline">Suivi client CRM</Link></li>
-            <li><Link href="/rdv" className="hover:underline">Prise de rendez-vous</Link></li>
-            <li><Link href="/formations" className="hover:underline">Formations Pro</Link></li>
-            <li><Link href="/offres" className="hover:underline">Offres & Devis</Link></li>
-            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
-          </ul>
+        {/* Contacts */}
+        <div className="text-sm text-center md:text-left space-y-2">
+          <p>📞 +237 694 34 15 86</p>
+          <p>📞 +237 620 21 62 17</p>
+          <p>📧 samuelobaml@dlsolutions.com</p>
         </div>
-      </div>
 
-      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} DL Solutions. Tous droits réservés. |
-        <Link href="https://www.dlsolutions.com" className="ml-1 underline hover:text-white">www.dlsolutions.com</Link>
+        {/* Réseaux sociaux */}
+        <div className="flex gap-4">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431179/facebook_vlin9i.jpg" alt="Facebook" width={32} height={32} className="rounded-full" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431188/instagram_ixnsiq.jpg" alt="Instagram" width={32} height={32} className="rounded-full" />
+          </a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431183/tiktok_tqe6vk.jpg" alt="TikTok" width={32} height={32} className="rounded-full" />
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431190/twiter_mzyujj.jpg" alt="Twitter" width={32} height={32} className="rounded-full" />
+          </a>
+          <a href="https://wa.me/237694341586" target="_blank" rel="noopener noreferrer">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431187/whatsapp_pixhht.jpg" alt="WhatsApp" width={32} height={32} className="rounded-full" />
+          </a>
+        </div>
       </div>
     </footer>
   );
