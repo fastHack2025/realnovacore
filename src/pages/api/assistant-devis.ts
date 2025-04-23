@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-  apiKey: "REMOVED", // Assure-toi que cette clé est dans ton .env.local
+  apiKey: process.env.OPENAI_API_KEY!, // 🔐 Sécurisé via .env.local
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
