@@ -1,7 +1,7 @@
 {
-  "/rdv/page": "app/rdv/page.js",
-  "/novacore/page": "app/novacore/page.js",
   "/formations/page": "app/formations/page.js",
-  "/formations/televente/page": "app/formations/televente/page.js",
-  "/formations/televente/inscription/page": "app/formations/televente/inscription/page.js"
+  "/contact/page": "app/contact/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/novacore/page": "app/novacore/page.js",
+  "/rdv/page": "app/rdv/page.js"
 }

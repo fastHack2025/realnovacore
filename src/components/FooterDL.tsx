@@ -27,21 +27,21 @@ export default function FooterDL() {
         </div>
 
         {/* Réseaux sociaux */}
-        <div className="flex gap-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431179/facebook_vlin9i.jpg" alt="Facebook" width={32} height={32} className="rounded-full" />
+        <div className="flex flex-wrap justify-center gap-3">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431179/facebook_vlin9i.jpg" alt="Facebook" width={40} height={40} className="object-cover rounded-full w-full h-full" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431188/instagram_ixnsiq.jpg" alt="Instagram" width={32} height={32} className="rounded-full" />
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431188/instagram_ixnsiq.jpg" alt="Instagram" width={40} height={40} className="object-cover rounded-full w-full h-full" />
           </a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431183/tiktok_tqe6vk.jpg" alt="TikTok" width={32} height={32} className="rounded-full" />
+          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431183/tiktok_tqe6vk.jpg" alt="TikTok" width={40} height={40} className="object-cover rounded-full w-full h-full" />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431190/twiter_mzyujj.jpg" alt="Twitter" width={32} height={32} className="rounded-full" />
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431190/twiter_mzyujj.jpg" alt="Twitter" width={40} height={40} className="object-cover rounded-full w-full h-full" />
           </a>
-          <a href="https://wa.me/237694341586" target="_blank" rel="noopener noreferrer">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431187/whatsapp_pixhht.jpg" alt="WhatsApp" width={32} height={32} className="rounded-full" />
+          <a href="https://wa.me/237694341586" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
+            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431187/whatsapp_pixhht.jpg" alt="WhatsApp" width={40} height={40} className="object-cover rounded-full w-full h-full" />
           </a>
         </div>
       </div>
