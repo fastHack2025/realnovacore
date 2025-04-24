@@ -1,21 +1,29 @@
-import "../styles/globals.css"; // ✅ Chemin corrigé
-import type { Metadata } from "next";
-import Header from "@/components/Header";
-import FooterDL from "@/components/FooterDL";
+// ✅ layout.tsx – finalisé, propre et sans erreur avec ClerkProvider
 
-export const metadata: Metadata = {
-  title: "DL Solutions | Plateforme NovaCore",
-  description: "Améliorez votre communication digitale avec l'IA de DL Solutions.",
+import "@/styles/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
+import FloatingChat from "@/components/FloatingChat";
+import FooterDL from "@/components/FooterDL";
+import Header from "@/components/Header";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "NovaCore – Plateforme IA CRM SaaS",
+  description: "Plateforme intelligente tout-en-un pour la gestion client, les rendez-vous, l’IA, et bien plus."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className="bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
-        <Header />
-        <main>{children}</main>
-        <FooterDL />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="fr">
+        <body className={`${inter.className} bg-white dark:bg-black text-gray-900 dark:text-white`}>
+          <Header />
+          {children}
+          <FloatingChat />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

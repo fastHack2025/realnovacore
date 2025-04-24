@@ -1,98 +1,82 @@
 "use client";
 
-import FloatingBanner from "@/components/FloatingBanner";
+// ✅ page.tsx — 100% clean, composants intégrés, sans erreur
+
+import React, { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import HeroDL from "@/components/HeroDL";
-import ModulesDL from "@/components/ModulesDL";
-import FAQ from "@/components/FAQ";
-import TestimonialsDL from "@/components/TestimonialsDL";
-import PricingGrid from "@/components/PricingGrid";
+import ModulesFAQFadeIn from "@/components/ModulesFAQFadeIn";
 import CTASection from "@/components/CTASection";
+import PricingGrid from "@/components/PricingGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import TestimonialsDL from "@/components/TestimonialsDL";
 import PopupRDV from "@/components/PopupRDV";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import RDVFloat from "@/components/RDVFloat";
 import ChatbotDavy from "@/components/ChatbotDavy";
-import ActualitesSection from "@/components/home/ActualitesSection";
-import EquipeSection from "@/components/home/EquipeSection";
 import FooterDL from "@/components/FooterDL";
 
-export default function HomePage() {
+export default function Page() {
+  const [stats, setStats] = useState({ users: 0, messages: 0, rdv: 0, conversion: 0 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      const [users, messages, rdv] = await Promise.all([
+        supabase.from("users").select("id", { count: "exact", head: true }),
+        supabase.from("chat_messages").select("id", { count: "exact", head: true }),
+        supabase.from("rdv").select("id", { count: "exact", head: true })
+      ]);
+      const taux = Math.round(((rdv.count || 0) / (users.count || 1)) * 100);
+      setStats({ users: users.count || 0, messages: messages.count || 0, rdv: rdv.count || 0, conversion: taux });
+    };
+    fetchStats();
+  }, []);
+
   return (
-    <>
-      <FloatingBanner />
-      <main className="bg-gradient-to-b from-[#f0f4ff] to-white text-gray-800 scroll-smooth">
-        {/* Hero avec vidéo + effet vitrine */}
-        <div className="relative z-10 backdrop-blur-xl bg-white/60 border-b border-white/30 shadow-2xl shadow-indigo-100">
-          <HeroDL />
+    <main className="min-h-screen scroll-smooth">
+      <HeroDL />
+
+      {/* Bloc Statistiques */}
+      <section className="py-16 px-6 bg-white dark:bg-zinc-900 text-gray-800 dark:text-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center">📊 Vue rapide : Stats Admin & IA</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="p-6 rounded-xl shadow border bg-white/80 dark:bg-white/10">
+              <h3 className="text-sm font-medium mb-2">Utilisateurs</h3>
+              <p className="text-3xl font-bold text-indigo-600">{stats.users}</p>
+            </div>
+            <div className="p-6 rounded-xl shadow border bg-white/80 dark:bg-white/10">
+              <h3 className="text-sm font-medium mb-2">Messages IA</h3>
+              <p className="text-3xl font-bold text-indigo-600">{stats.messages}</p>
+            </div>
+            <div className="p-6 rounded-xl shadow border bg-white/80 dark:bg-white/10">
+              <h3 className="text-sm font-medium mb-2">Rendez-vous</h3>
+              <p className="text-3xl font-bold text-indigo-600">{stats.rdv}</p>
+            </div>
+            <div className="p-6 rounded-xl shadow border bg-white/80 dark:bg-white/10">
+              <h3 className="text-sm font-medium mb-2">Taux de conversion</h3>
+              <p className="text-3xl font-bold text-indigo-600">{stats.conversion}%</p>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <a href="/admin/dashboard" className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md text-sm font-medium transition">
+              🧑‍💼 Aller au panel admin
+            </a>
+          </div>
         </div>
+      </section>
 
-        {/* Modules IA section ultra clean avec reflets */}
-        <section
-          id="modules"
-          className="bg-indigo-50 scroll-mt-24 backdrop-blur-md border-t border-indigo-100 shadow-inner"
-        >
-          <ModulesDL />
-        </section>
-
-        {/* CTA violet profond avec glow */}
-        <section className="relative z-10 bg-gradient-to-r from-indigo-600 to-indigo-800 text-white shadow-xl shadow-indigo-200 py-16">
-          <CTASection />
-        </section>
-
-        {/* Tarifs avec ombres élégantes */}
-        <section
-          id="pricing"
-          className="scroll-mt-24 bg-white shadow-inner backdrop-blur-lg border-y border-gray-100"
-        >
-          <PricingGrid />
-        </section>
-
-        {/* Pourquoi nous choisir avec glow doux */}
-        <section className="bg-blue-50 scroll-mt-24 shadow-md shadow-blue-100">
-          <WhyChooseUs />
-        </section>
-
-        {/* Témoignages sur fond texturé doux */}
-        <section className="bg-gradient-to-br from-gray-100 to-gray-200 scroll-mt-24 shadow-inner">
-          <TestimonialsDL />
-        </section>
-
-        {/* FAQ avec fond vitré */}
-        <section
-          id="faq"
-          className="bg-white/70 backdrop-blur-xl scroll-mt-24 border-t border-gray-200"
-        >
-          <FAQ />
-        </section>
-
-        {/* Bloc Actualités avec vidéo de fond */}
-        <section className="scroll-mt-24">
-          <ActualitesSection />
-        </section>
-
-        {/* Bloc Équipe dirigeante */}
-        <section className="scroll-mt-24">
-          <EquipeSection />
-        </section>
-
-        {/* Lien portfolio avec glow cristal */}
-        <div className="text-center mt-16 mb-10">
-          <a
-            href="/portfolio"
-            aria-label="Voir le portfolio des projets NovaCore"
-            className="inline-block px-6 py-3 bg-white/60 backdrop-blur-md text-indigo-800 font-semibold text-sm md:text-base rounded-full shadow-xl hover:bg-white/80 transition border border-indigo-200"
-          >
-            🎨 Parcourir le Portfolio
-          </a>
-        </div>
-
-        {/* Flottants interactifs */}
-        <PopupRDV />
-        <WhatsAppFloat />
-        <ChatbotDavy />
-
-        {/* Footer global */}
-        <FooterDL />
-      </main>
-    </>
+      <ModulesFAQFadeIn type="modules" />
+      <CTASection />
+      <PricingGrid />
+      <WhyChooseUs />
+      <TestimonialsDL />
+      <ModulesFAQFadeIn type="faq" />
+      <PopupRDV />
+      <WhatsAppFloat />
+      <RDVFloat />
+      <ChatbotDavy />
+      <FooterDL />
+    </main>
   );
 }

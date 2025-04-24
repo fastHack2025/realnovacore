@@ -1,82 +1,159 @@
+// ✅ src/app/admin/dashboard/page.tsx — Dashboard IA + CRM complet et définitif
+
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function AdminDashboard() {
-  const { user } = useUser();
-  const router = useRouter();
-  const [stats, setStats] = useState({ users: 0, rdv: 0, devis: 0, modules: 0, support: 0 });
-
-  useEffect(() => {
-    if (user && user.publicMetadata?.role !== "admin") router.push("/");
-  }, [user]);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      const [users, rdv, devis, modules, support] = await Promise.all([
-        supabase.from("users").select("id"),
-        supabase.from("rdv").select("id"),
-        supabase.from("devis_ia").select("id"),
-        supabase.from("modules_clients").select("id"),
-        supabase.from("support_tickets").select("id"),
-      ]);
-      setStats({
-        users: users.data?.length || 0,
-        rdv: rdv.data?.length || 0,
-        devis: devis.data?.length || 0,
-        modules: modules.data?.length || 0,
-        support: support.data?.length || 0,
-      });
-    };
-    fetchStats();
-  }, []);
-
-  const data = [
-    { name: "Utilisateurs", value: stats.users },
-    { name: "RDV", value: stats.rdv },
-    { name: "Devis IA", value: stats.devis },
-    { name: "Modules IA", value: stats.modules },
-    { name: "Support", value: stats.support },
-  ];
-
-  return (
-    <main className="min-h-screen bg-gray-50 py-10 px-6">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-indigo-700 mb-6">📊 Tableau de bord administrateur</h1>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-          <Card title="Utilisateurs inscrits" value={stats.users} color="indigo" />
-          <Card title="Rendez-vous pris" value={stats.rdv} color="blue" />
-          <Card title="Devis IA générés" value={stats.devis} color="green" />
-          <Card title="Modules activés" value={stats.modules} color="purple" />
-          <Card title="Demandes support" value={stats.support} color="pink" />
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700">📈 Vue graphique globale</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-    </main>
-  );
+interface Stat {
+  label: string;
+  value: number;
 }
 
-function Card({ title, value, color }: { title: string; value: number; color: string }) {
+interface MonthlyData {
+  label: string;
+  value: number;
+}
+
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<Stat[]>([]);
+  const [monthlyData, setMonthlyData] = useState<MonthlyData[]>([]);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      const [users, messages, rdv, clients, prompts] = await Promise.all([
+        supabase.from("users").select("id", { count: "exact", head: true }),
+        supabase.from("chat_messages").select("id", { count: "exact", head: true }),
+        supabase.from("rdv").select("id", { count: "exact", head: true }),
+        supabase.from("crm_clients").select("id", { count: "exact", head: true }),
+        supabase.from("historique_ia").select("id", { count: "exact", head: true })
+      ]);
+
+      setStats([
+        { label: "Utilisateurs", value: users.count || 0 },
+        { label: "Messages IA", value: messages.count || 0 },
+        { label: "RDV pris", value: rdv.count || 0 },
+        { label: "Clients CRM", value: clients.count || 0 },
+        { label: "Prompts IA", value: prompts.count || 0 }
+      ]);
+    };
+
+    const loadMonthlyGraph = async () => {
+      const { data: ia } = await supabase.from("historique_ia").select("created_at");
+      const { data: crm } = await supabase.from("crm_clients").select("created_at");
+
+      const formatMonth = (date: string) => new Date(date).toLocaleDateString("fr-FR", { month: "short", year: "numeric" });
+      const combine = [...(ia || []), ...(crm || [])];
+      const grouped: Record<string, number> = {};
+
+      combine.forEach((d: any) => {
+        const key = formatMonth(d.created_at);
+        grouped[key] = (grouped[key] || 0) + 1;
+      });
+
+      const result: MonthlyData[] = Object.entries(grouped).map(([label, value]) => ({ label, value }));
+      result.sort((a, b) => new Date(a.label).getTime() - new Date(b.label).getTime());
+      setMonthlyData(result);
+    };
+
+    loadStats();
+    loadMonthlyGraph();
+  }, []);
+
   return (
-    <div className={`bg-${color}-100 text-${color}-800 p-6 rounded-xl shadow-md`}>
-      <p className="text-sm font-medium mb-1">{title}</p>
-      <p className="text-3xl font-bold">{value}</p>
+    <main className="p-6" id="dashboardPrintZone">
+  <script suppressHydrationWarning>
+    {(() => {
+      fetch("/api/logs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "admin_dashboard_viewed" })
+      });
+    })()}
+  </script>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold">📊 Dashboard Résumé NovaCore</h1>
+        <button
+          onClick={() => {
+            const printContents = document.getElementById("dashboardPrintZone")?.innerHTML;
+            const win = window.open("", "_blank");
+            if (win && printContents) {
+              win.document.write(`<html><head><title>Export Dashboard</title></head><body>${printContents}</body></html>`);
+              win.document.close();
+              fetch("/api/logs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "admin_dashboard_exported" })
+              });
+              win.print();
+            }
+          }}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1 text-sm rounded-md"
+        >
+          🖨️ Exporter ce dashboard
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
+        {stats.map((stat, idx) => (
+          <Card key={idx} className="border">
+            <CardContent className="p-5 text-center">
+              <p className="text-sm text-gray-500 mb-1">{stat.label}</p>
+              <p className="text-2xl font-bold text-indigo-700">{stat.value.toLocaleString()}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-12 bg-white p-6 border rounded-xl">
+        <h2 className="text-lg font-semibold mb-4">📈 Évolution mensuelle IA & CRM</h2>
+        {monthlyData.length === 0 ? (
+          <p className="text-sm text-gray-500">Chargement en cours...</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm border">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-4 py-2 text-left">Mois</th>
+                  <th className="px-4 py-2 text-left">Nombre d’entrées</th>
+                </tr>
+              </thead>
+              <tbody>
+                {monthlyData.map((item, idx) => (
+                  <tr key={idx} className="border-t">
+                    <td className="px-4 py-2">{item.label}</td>
+                    <td className="px-4 py-2 font-semibold text-indigo-600">{item.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    <div className="mt-12 bg-white p-6 border rounded-xl">
+  <h2 className="text-lg font-semibold mb-4">📊 Répartition par module</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div className="p-4 border rounded-md bg-gray-50">
+      <h3 className="text-sm font-semibold text-gray-600 mb-1">🧠 IA - Messages</h3>
+      <p className="text-xl font-bold text-indigo-600">
+        {stats.find(s => s.label === "Messages IA")?.value ?? 0}
+      </p>
     </div>
+    <div className="p-4 border rounded-md bg-gray-50">
+      <h3 className="text-sm font-semibold text-gray-600 mb-1">📚 CRM - Clients</h3>
+      <p className="text-xl font-bold text-indigo-600">
+        {stats.find(s => s.label === "Clients CRM")?.value ?? 0}
+      </p>
+    </div>
+    <div className="p-4 border rounded-md bg-gray-50">
+      <h3 className="text-sm font-semibold text-gray-600 mb-1">📅 CRM - RDV</h3>
+      <p className="text-xl font-bold text-indigo-600">
+        {stats.find(s => s.label === "RDV pris")?.value ?? 0}
+      </p>
+    </div>
+  </div>
+</div>
+</main>
   );
 }

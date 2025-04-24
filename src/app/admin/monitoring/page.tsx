@@ -1,46 +1,82 @@
+// ✅ src/app/admin/monitoring/page.tsx
+
 "use client";
 
-import StatusBadge from "@/app/components/StatusBadge";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabaseClient";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Loader2, CheckCircle2, AlertTriangle } from "lucide-react";
+
+interface MonitorLog {
+  id: string;
+  type: string; // "cron" | "api" | "uptime"
+  message: string;
+  status: "ok" | "error";
+  created_at: string;
+}
 
 export default function MonitoringPage() {
-  const [logs, setLogs] = useState<any[]>([]);
+  const supabase = createClient();
+  const [logs, setLogs] = useState<MonitorLog[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase
-      .from("monitor_logs")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => setLogs(data || []));
+    const fetchLogs = async () => {
+      const { data } = await supabase.from("monitor_logs").select("*").order("created_at", { ascending: false });
+      if (data) setLogs(data);
+      setLoading(false);
+    };
+    fetchLogs();
   }, []);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">📡 Monitoring NovaCore</h1>
-        <StatusBadge />
-      </div>
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">🧪 Monitoring Système</h1>
 
-      <div className="rounded overflow-hidden shadow border mb-8">
-        <iframe
-          src="https://status-novacore.uptimerobot.com"
-          width="100%"
-          height="450"
-          style={{ border: "none" }}
-          title="NovaCore Status Page"
-        />
-      </div>
-
-      <h2 className="text-xl font-semibold mb-2">📜 Logs des incidents</h2>
-      <ul className="space-y-2 text-sm">
-        {logs.map((log) => (
-          <li key={log.id} className="border p-2 rounded bg-white shadow-sm">
-            <span className="font-semibold">{log.status}</span> —{" "}
-            {log.message} <span className="text-gray-400 text-xs">({new Date(log.created_at).toLocaleString()})</span>
-          </li>
-        ))}
-      </ul>
+      <Card>
+        <CardContent className="overflow-x-auto p-4">
+          {loading ? (
+            <div className="flex justify-center items-center h-40">
+              <Loader2 className="animate-spin w-8 h-8 text-gray-500" />
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Statut</TableHead>
+                  <TableHead>Message</TableHead>
+                  <TableHead>Date</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {logs.map((log) => (
+                  <TableRow key={log.id}>
+                    <TableCell className="capitalize">{log.type}</TableCell>
+                    <TableCell>
+                      {log.status === "ok" ? (
+                        <span className="text-green-600 inline-flex items-center"><CheckCircle2 className="w-4 h-4 mr-1" /> OK</span>
+                      ) : (
+                        <span className="text-red-600 inline-flex items-center"><AlertTriangle className="w-4 h-4 mr-1" /> Erreur</span>
+                      )}
+                    </TableCell>
+                    <TableCell>{log.message}</TableCell>
+                    <TableCell>{new Date(log.created_at).toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+                {logs.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center text-gray-400 py-4">
+                      Aucun événement système enregistré.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
