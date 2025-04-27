@@ -1,21 +1,38 @@
-# 📦 NovaCore Portfolio CMS
+# 🚀 DL Solutions + NovaCore - Site Web Officiel
 
-Un module complet Next.js 15, Tailwind, Swiper, Supabase, prêt pour une vitrine professionnelle avec édition.
+Bienvenue sur le projet **DL Solutions** et **NovaCore**, construit avec **Next.js 15**, **TailwindCSS**, **Framer Motion** et **React Icons**.
 
-## 🚀 Fonctionnalités
+## 🔥 Fonctionnalités principales
+- Header et Footer responsive ultra premium
+- Hero Section moderne et impactante
+- Services clairs et animés
+- Actualités stylées
+- Section Avis clients + Formulaire Suggestion
+- Popup Réservation automatique
+- Chatbot IA discret
+- Assistant Vocal IA DaVY intégré (Speech Recognition)
+- Support du Dark/Light Mode
+- 100% Mobile First Design
 
-- Vue Slider Swiper + Grille Toggle
-- Support image & vidéo
-- Recherche intelligente avec surbrillance
-- Zoom tactile sur image
-- Supabase realtime (ajout / suppression live)
-- CMS admin intégré
-
-## 📦 Démarrage
-
+## 📂 Structure du projet
 ```bash
-git clone https://github.com/ton-org/nova-portfolio.git
-cd nova-portfolio
-cp .env.example .env.local
-npm install
-npm run dev
+/src
+  /app
+    /services/page.tsx
+    /projects/page.tsx
+    /contact/page.tsx
+    /about/page.tsx
+    /novacore/page.tsx
+    /realisations/page.tsx
+    /blog/page.tsx
+  /components
+    Header.tsx
+    Footer.tsx
+    NewsSection.tsx
+    ReviewsSection.tsx
+    Chatbot.tsx
+    ReservationPopup.tsx
+    VoiceAssistant.tsx
+    ThemeToggle.tsx
+/public/icons
+  # Logos, badges, QR code

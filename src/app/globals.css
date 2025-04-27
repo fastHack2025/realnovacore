@@ -1,31 +1,70 @@
-/* src/app/globals.css */
-
+/* ========== BASE ========== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scroll */
-html {
+/* 🌌 Full Page Warp & Scroll Snap */
+html, body {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  height: 100%;
+  overflow-x: hidden;
 }
 
-/* Hover Glow (NovaCore Signature) */
-.hover\:glow:hover {
-  filter: drop-shadow(0 0 6px rgba(79, 70, 229, 0.7));
+/* 🌠 Snap Section Style */
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  height: 100vh;
 }
 
-/* Preloader animation */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* 🌠 Space Warp Scroll Effect */
+.warp-effect {
+  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
 }
 
-/* Example for preloader */
-.loader {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #4f46e5;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  animation: spin 1s linear infinite;
+.warp-effect.scrolled {
+  transform: scale(0.95) rotateX(15deg) translateY(-60px);
+  opacity: 0;
+}
+
+/* 🌠 Fade-In Appear for Sections */
+.section {
+  transition: opacity 1s ease, transform 1s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/* 🌠 Video Smoothing */
+video {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 🌠 Smooth Links */
+a {
+  transition: color 0.3s ease;
+}
+
+/* 🌠 Extra polish */
+* {
+  scroll-margin-top: 80px;
+}
+
+/* 🌟 Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  width: 5px;
+  height: 0;
+  background: linear-gradient(to bottom, #6366f1, #3b82f6);
+  border-radius: 9999px;
+  z-index: 1000;
+  transition: height 0.2s ease-out;
 }

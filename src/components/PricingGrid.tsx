@@ -1,32 +1,81 @@
-"use client";
+// src/components/PricingGrid.tsx
+'use client';
 
-export default function Pricing() {
+import { motion } from 'framer-motion';
+
+const plans = [
+  {
+    name: 'Starter',
+    price: '490€',
+    description: 'Idéal pour les indépendants qui veulent moderniser leur relation client et leurs outils.',
+    features: [
+      'Audit expérience client de base',
+      'Déploiement CRM simple',
+      'Calendrier éditorial light',
+      'Création mini-landing page',
+    ],
+    isPopular: false,
+  },
+  {
+    name: 'Business NovaCore',
+    price: '1290€',
+    description: 'Parfait pour PME voulant automatiser, digitaliser et améliorer leur CX + CRM NovaCore.',
+    features: [
+      'Audit complet expérience client',
+      'Mise en place CRM avancé',
+      'Portail client personnalisé',
+      'Automatisation processus IA',
+    ],
+    isPopular: true,
+  },
+  {
+    name: 'Corporate Excellence',
+    price: 'Sur devis',
+    description: 'Solutions haut de gamme sur-mesure pour groupes & grandes entreprises.',
+    features: [
+      'Audit CX, CRM, stratégie digitale',
+      'Création plateforme IA dédiée',
+      'Développement spécifique NovaCore',
+      'Accompagnement VIP 6 mois',
+    ],
+    isPopular: false,
+  },
+];
+
+export default function PricingGrid() {
   return (
-    <section id="tarifs" className="bg-gradient-to-br from-black to-gray-900 py-20 px-6 text-white">
-      <h2 className="text-4xl font-bold text-center mb-12 animate-fade-in-down">Nos Offres</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-        
-        {[
-          { title: "Starter", price: "49€", features: ["1 Site Web", "Support 24/7", "SEO de base"] },
-          { title: "Business", price: "99€", features: ["Site + CRM", "Support prioritaire", "SEO avancé"] },
-          { title: "Elite VIP", price: "249€", features: ["Site + App mobile", "Support VIP 24/7", "SEO Premium", "Marketing Automation"] }
-        ].map((pack, idx) => (
-          <div
-            key={idx}
-            className="relative border border-white/10 rounded-2xl p-8 backdrop-blur-lg bg-white/5 hover:scale-105 transition-transform duration-500 hover:border-yellow-400 animate-fade-in-up"
-          >
-            <h3 className="text-2xl font-bold mb-4">{pack.title}</h3>
-            <p className="text-4xl font-extrabold mb-6">{pack.price}</p>
-            <ul className="space-y-3 text-gray-300">
-              {pack.features.map((feature, i) => (
-                <li key={i} className="hover:text-yellow-300">{feature}</li>
-              ))}
-            </ul>
-            <button className="mt-8 bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300 shadow-lg">
-              Choisir
-            </button>
-          </div>
-        ))}
+    <section className="py-20 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a]">
+      <div className="container mx-auto px-6 text-center">
+        <motion.h2
+          className="text-4xl font-bold text-white mb-10"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Nos Offres NovaCore
+        </motion.h2>
+        <div className="grid md:grid-cols-3 gap-12">
+          {plans.map((plan, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+              className={`rounded-2xl p-8 shadow-2xl backdrop-blur-lg bg-white/10 ${plan.isPopular ? 'border-4 border-primary' : 'border border-white/20'}`}
+            >
+              <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
+              <p className="text-3xl font-extrabold text-primary mb-6">{plan.price}</p>
+              <p className="text-gray-400 mb-8">{plan.description}</p>
+              <ul className="text-gray-300 text-left space-y-4 mb-8">
+                {plan.features.map((feature, index) => (
+                  <li key={index}>✔️ {feature}</li>
+                ))}
+              </ul>
+              <button className="bg-primary text-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition">
+                Sélectionner
+              </button>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
