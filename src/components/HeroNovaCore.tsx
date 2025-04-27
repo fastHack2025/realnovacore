@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 
 export default function HeroNovaCore() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Vidéo en arrière-plan */}
       <video
         autoPlay
         muted
@@ -19,11 +18,8 @@ export default function HeroNovaCore() {
         />
         Votre navigateur ne prend pas en charge les vidéos HTML5.
       </video>
-
-      {/* Filtre sombre */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-      {/* Contenu centré */}
       <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
         <div className="max-w-3xl mx-auto text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
@@ -41,5 +37,5 @@ export default function HeroNovaCore() {
         </div>
       </div>
     </section>
-  )
+  );
 }

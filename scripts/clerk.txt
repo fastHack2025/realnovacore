@@ -1,0 +1,107 @@
+User avatar
+Personal Account
+
+dave and luce solutions
+Free
+
+development
+
+Overview
+Users
+Organizations
+Configure
+Users
+All
+Invitations
+Search
+User
+Username
+Last signed in
+
+Created
+(in descending order, click here to toggle)
+Actions
+Profile picture of obamsammuel8@gmail.com
+obamsammuel8@gmail.com
+obamsammuel8@gmail.com
+superadmin	-	April 24, 2025	
+Profile picture of admin@dlsolutions.com
+admin@dlsolutions.com
+admin@dlsolutions.com
+administrator	-	April 10, 2025	
+Profile picture of fast safe
+fast safe
+fastsafe2025@gmail.com
+admin	April 10, 2025	April 10, 2025	
+user_2wC3TyGfquwZFqnN5KOohFbLNH0 obamsammuel8@gmail.com superadmin User avatar
+Personal Account
+
+dave and luce solutions
+Free
+
+development
+
+Overview
+Users
+Organizations
+Configure
+Users
+User avatar
+admin@dlsolutions.com
+Never active
+
+Profile
+Settings
+Personal Information
+User avatar
+Recommend size 1:1, up to 2mb
+Email addresses
+Email address	Date added	Actions
+admin@dlsolutions.com
+
+Primary
+added Apr 10, 2025	
+obamsamuel8@gmail.com
+
+added Apr 10, 2025	
+Username
+administrator
+Social accounts
+Social account	Date added	Actions
+None
+Password
+Password	Actions
+●●●●●●●●●●
+Devices
+Device	IP address and location	Date added	Actions
+None
+Metadata
+Public
+role:"admin"
+Private
+None
+Unsafe
+None
+Disabled fields
+User ID
+user_2vWIrG1B7dZbd3bkrZpWca2A3nV
+
+Primary email
+admin@dlsolutions.com
+
+Username
+administrator
+
+User since
+April 10, 2025
+Profile updated 16 days ago
+user_2vWIrG1B7dZbd3bkrZpWca2A3nVadmin@dlsolutions.comadministrator app_2vHsOfMthx7XtSpUhk2umAsHHuw ins_2vHsObuvuuBQXRJeAUaMmXAknN8   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cGVhY2VmdWwtdGFkcG9sZS04Mi5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_fIXQwTD2vcOgT3J0uAX6uBMFvsdWOkZJh1p3JcQWs2  https://peaceful-tadpole-82.clerk.accounts.dev  https://api.clerk.com https://peaceful-tadpole-82.clerk.accounts.dev/.well-known/jwks.json -----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAymBhP48hw7rCFXho0CTN
+IzpPBvvd9clL6i1PAYrRNzNlUi358QJI6wuJEUxwdOGUeXpqEVvf1284/5VvYdnJ
+X6UiUvy9TjoZDnj0OjRdtAhAIrsaNYh32+vgkoVO88mgQ8X5IfP9iRo1Idc09/+m
+mHxhz7VmYblqjp+/SqksiGhAREMtaNZCB7yatJqczuNZ51OXZnuhmIpMMcrPiCXN
+dtYbSzwSpOE7CX+UKW81Nay5xNJq6V3MkiXdWtkAMw6XDmB0cmed9tq5S6Fr8Xfu
+O9rA4JxAQmkHDFbpQg0f+a22ckf0Fh7rL7V/+64JTUpYiExkCJextV47sw7gdVLc
+3wIDAQAB
+-----END PUBLIC KEY-----

@@ -1,70 +1,50 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase";
 
 export default function HotelCRMPage() {
+  const supabase = createClient();
+  const [chambres, setChambres] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchChambres() {
+      const { data, error } = await supabase.from("chambres").select("*");
+      if (!error) {
+        setChambres(data || []);
+      }
+      setLoading(false);
+    }
+    fetchChambres();
+  }, [supabase]);
+
   return (
-    <main className="relative min-h-screen px-6 py-24 text-white">
-      {/* Fond vidéo */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source
-          src="https://res.cloudinary.com/dko5sommz/video/upload/v1744416232/background_abzanh.mp4"
-          type="video/mp4"
-        />
-      </video>
+    <main className="min-h-screen bg-gray-100 text-gray-900 p-8">
+      <header className="mb-12">
+        <h1 className="text-4xl font-bold mb-2 animate-fadeInUp">🏨 Gestion des Chambres</h1>
+        <p className="text-lg text-gray-600 animate-fadeInUp">Suivi en temps réel de vos hébergements.</p>
+      </header>
 
-      {/* Overlay sombre */}
-      <div className="absolute inset-0 bg-black/70 z-10" />
-
-      {/* Contenu principal */}
-      <div className="relative z-20 max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-10 drop-shadow-xl">🛎️ CRM Hôtellerie — NovaCore</h1>
-        <p className="text-lg text-gray-200 mb-12">
-          Gérez vos réservations, vos clients et vos opérations hôtelières avec une intelligence automatisée.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { title: "Réservations", href: "/crm/hotel/reservations", emoji: "📅" },
-            { title: "Chambres", href: "/crm/hotel/chambres", emoji: "🛏️" },
-            { title: "Clients", href: "/crm/hotel/clients", emoji: "🧍‍♂️" },
-            { title: "Messages & Rappels", href: "/crm/hotel/messages", emoji: "💬" },
-            { title: "Scoring IA", href: "/crm/hotel/scoring", emoji: "🤖" },
-            { title: "Facturation", href: "/crm/hotel/factures", emoji: "📄" },
-          ].map(({ title, href, emoji }) => (
-            <Link
-              key={href}
-              href={href}
-              className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl text-left"
-            >
-              <h2 className="text-xl font-semibold mb-1 text-white">{emoji} {title}</h2>
-              <p className="text-gray-300 text-sm">Accéder au module {title.toLowerCase()}</p>
-            </Link>
+      {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="loader animate-bounce">Chargement...</div>
+        </div>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {chambres.map((chambre) => (
+            <div key={chambre.id} className="p-6 rounded-lg shadow-md bg-white hover:shadow-2xl transition transform hover:scale-105 animate-zoomIn">
+              <h2 className="text-xl font-semibold">{chambre.nom}</h2>
+              <p className="text-gray-600">Type : {chambre.type}</p>
+              <p className="text-gray-600">Statut : {chambre.statut}</p>
+              <p className="text-gray-600">Capacité : {chambre.capacite} pers.</p>
+            </div>
           ))}
-        </div>
-      </div>
+        </section>
+      )}
 
-      {/* Footer professionnel */}
-      <footer className="relative z-20 mt-20 w-full max-w-4xl mx-auto text-center text-sm text-white opacity-80">
-        <div className="flex flex-col items-center gap-3">
-          <Image
-            src="https://res.cloudinary.com/dko5sommz/image/upload/v1743895989/1_f3thi3.png"
-            alt="Logo DL Solutions"
-            width={70}
-            height={70}
-            className="rounded-full"
-          />
-          <p>© Dave & Luce Solutions — <strong>Samuel OBAM made this</strong></p>
-          <p>📞 +237 694 34 15 86 — +237 620 21 62 17</p>
-          <p>📧 samuelobaml@dlsolutions.com</p>
-        </div>
+      <footer className="mt-16 text-center text-gray-500 text-sm animate-fadeInUp">
+        &copy; {new Date().getFullYear()} NovaCore CRM - Tous droits réservés.
       </footer>
     </main>
   );

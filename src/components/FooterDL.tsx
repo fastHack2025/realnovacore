@@ -1,49 +1,47 @@
-"use client";
-
-import Image from "next/image";
+// src/components/FooterDL.tsx
+import Link from "next/link";
 
 export default function FooterDL() {
   return (
-    <footer className="bg-black text-white py-10 px-6 border-t border-white/10 mt-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        {/* Logo et signature */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <Image
-            src="https://res.cloudinary.com/dko5sommz/image/upload/v1743895989/1_f3thi3.png"
-            alt="DL Solutions"
-            width={70}
-            height={70}
-            className="rounded-full border bg-white p-1 shadow"
-          />
-          <p className="text-sm mt-3">© Dave & Luce Solutions</p>
-          <p className="text-xs text-white/60 italic">Samuel OBAM made this</p>
+    <footer className="bg-gray-900 text-white px-6 py-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h2 className="text-2xl font-bold mb-4">NovaCore</h2>
+          <p className="text-gray-400">
+            Votre passerelle vers l'intelligence artificielle au service des entreprises.
+          </p>
         </div>
 
-        {/* Contacts */}
-        <div className="text-sm text-center md:text-left space-y-2">
-          <p>📞 +237 694 34 15 86</p>
-          <p>📞 +237 620 21 62 17</p>
-          <p>📧 samuelobaml@dlsolutions.com</p>
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Navigation</h3>
+          <ul className="space-y-2">
+            <li><Link href="/about" className="hover:text-indigo-400 hover:glow">À propos</Link></li>
+            <li><Link href="/services" className="hover:text-indigo-400 hover:glow">Services</Link></li>
+            <li><Link href="/contact" className="hover:text-indigo-400 hover:glow">Contact</Link></li>
+          </ul>
         </div>
 
-        {/* Réseaux sociaux */}
-        <div className="flex flex-wrap justify-center gap-3">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431179/facebook_vlin9i.jpg" alt="Facebook" width={40} height={40} className="object-cover rounded-full w-full h-full" />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431188/instagram_ixnsiq.jpg" alt="Instagram" width={40} height={40} className="object-cover rounded-full w-full h-full" />
-          </a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431183/tiktok_tqe6vk.jpg" alt="TikTok" width={40} height={40} className="object-cover rounded-full w-full h-full" />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431190/twiter_mzyujj.jpg" alt="Twitter" width={40} height={40} className="object-cover rounded-full w-full h-full" />
-          </a>
-          <a href="https://wa.me/237694341586" target="_blank" rel="noopener noreferrer" className="w-10 h-10">
-            <Image src="https://res.cloudinary.com/dko5sommz/image/upload/v1745431187/whatsapp_pixhht.jpg" alt="WhatsApp" width={40} height={40} className="object-cover rounded-full w-full h-full" />
-          </a>
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Suivez-nous</h3>
+          <div className="flex space-x-4">
+            <Link href="https://facebook.com" target="_blank">
+              <img src="/icons/facebook.svg" alt="Facebook" className="h-8 w-8 hover:glow" />
+            </Link>
+            <Link href="https://instagram.com" target="_blank">
+              <img src="/icons/instagram.svg" alt="Instagram" className="h-8 w-8 hover:glow" />
+            </Link>
+            <Link href="https://twitter.com" target="_blank">
+              <img src="/icons/twitter.svg" alt="Twitter" className="h-8 w-8 hover:glow" />
+            </Link>
+            <Link href="https://linkedin.com" target="_blank">
+              <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-8 w-8 hover:glow" />
+            </Link>
+          </div>
         </div>
+      </div>
+
+      <div className="mt-10 text-center text-gray-500 text-sm">
+        © {new Date().getFullYear()} NovaCore. Tous droits réservés.
       </div>
     </footer>
   );

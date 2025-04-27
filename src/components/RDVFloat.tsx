@@ -1,16 +1,12 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
+"use client";
 
 export default function RDVFloat() {
-  const router = useRouter();
-
   return (
-    <button
-      onClick={() => router.push('/rdv')}
-      className="fixed bottom-5 right-5 z-50 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-full shadow-lg transition-all duration-300"
+    <a
+      href="/rdv"
+      className="fixed bottom-6 right-20 z-50 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-full shadow-lg transition"
     >
-      📅 Prendre un RDV
-    </button>
+      Prendre RDV
+    </a>
   );
 }

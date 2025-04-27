@@ -1,0 +1,10 @@
+{"prompt":"Je veux prendre rendez-vous avec un médecin demain matin.","completion":"rdv"}
+{"prompt":"Pouvez-vous générer un devis pour une intervention chirurgicale ?","completion":"devis"}
+{"prompt":"Je souhaite signaler un problème après ma consultation.","completion":"SAV"}
+{"prompt":"Réservez-moi un lit pour une hospitalisation urgente.","completion":"réservation"}
+{"prompt":"Je veux une facture détaillée de mon séjour.","completion":"réclamation"}
+{"prompt":"Mon enfant a de la fièvre, puis-je avoir un rendez-vous pédiatrique ?","completion":"rdv"}
+{"prompt":"J’ai besoin d’un devis pour un bilan sanguin.","completion":"devis"}
+{"prompt":"J’ai des douleurs persistantes après l’opération.","completion":"SAV"}
+{"prompt":"Je souhaite planifier mon admission à la clinique.","completion":"réservation"}
+{"prompt":"Je pense que ma facture contient une erreur.","completion":"réclamation"}

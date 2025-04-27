@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa"
+import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
 
 export default function ContactSection() {
   return (
     <section className="bg-white py-16 px-4 sm:px-8 md:px-20 text-gray-800">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-        {/* Formulaire de contact */}
         <div className="bg-gray-50 p-8 rounded-2xl shadow-lg border">
           <h2 className="text-3xl font-bold mb-6">Contactez-nous</h2>
           <form className="space-y-4">
@@ -42,7 +41,6 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Carte Google Maps */}
         <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-indigo-500">
           <iframe
             title="Localisation"
@@ -55,5 +53,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

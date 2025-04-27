@@ -1,6 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+// lib/supabase.ts
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = 'https://ssmtqsjbppkcnfflymth.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzbXRxc2picHBrY25mZmx5bXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4NjkzNjAsImV4cCI6MjA2MDQ0NTM2MH0.WPCHUvfU0O8GRvkMraOdImuUJPpF6RZg67C8Qk2FjD0';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export async function getUserSession() {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  return data.session;
+}

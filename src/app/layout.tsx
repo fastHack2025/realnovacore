@@ -1,27 +1,24 @@
-// ✅ layout.tsx – finalisé, propre et sans erreur avec ClerkProvider
-
-import "@/styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Inter } from "next/font/google";
-import FloatingChat from "@/components/FloatingChat";
-import FooterDL from "@/components/FooterDL";
-import Header from "@/components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
+// src/app/layout.tsx
+import './globals.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ClerkProvider } from '@clerk/nextjs';
+import CookieConsent from '@/components/CookieConsent';
 
 export const metadata = {
-  title: "NovaCore – Plateforme IA CRM SaaS",
-  description: "Plateforme intelligente tout-en-un pour la gestion client, les rendez-vous, l’IA, et bien plus."
+  title: 'DL Solutions - Agence IT & Cloud',
+  description: 'DL Solutions : La puissance du numérique au service de votre entreprise.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="fr">
-        <body className={`${inter.className} bg-white dark:bg-black text-gray-900 dark:text-white`}>
+        <body className="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white min-h-screen flex flex-col overflow-x-hidden">
           <Header />
-          {children}
-          <FloatingChat />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <CookieConsent />
         </body>
       </html>
     </ClerkProvider>

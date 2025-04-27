@@ -1,88 +1,81 @@
-// ✅ FloatingChat.tsx — avec insertion Supabase automatique des messages IA
-
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function FloatingChat() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { from: "ia", text: "💬 Bonjour ! Posez-moi une question sur nos services." }
-  ]);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState("");
+  const [history, setHistory] = useState<string[]>([]);
 
   useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages]);
+    if (open) {
+      setHistory(["🤖 Davy : Salut 👋 Que puis-je faire pour toi aujourd’hui ?"]);
+    }
+  }, [open]);
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const value = inputRef.current?.value;
-    if (!value?.trim()) return;
+  const sendMessage = async () => {
+    if (!message.trim()) return;
+    const userMessage = message.trim();
+    setHistory((prev) => [...prev, `🧑 ${userMessage}`]);
+    setMessage("");
 
-    const userMessage = { from: "user", text: value };
-    setMessages((prev) => [...prev, userMessage]);
-    if (inputRef.current) inputRef.current.value = "";
+    try {
+      await supabase.from("chat_messages").insert({
+        message: userMessage,
+        role: "user",
+        user_id: null,
+      });
 
-    await supabase.from("chat_messages").insert([{ role: "user", content: value }]);
+      // simulate AI response
+      setTimeout(async () => {
+        const reply = "🤖 Davy : Merci pour ton message ! Je reviendrai vers toi.";
+        setHistory((prev) => [...prev, reply]);
 
-    const res = await fetch("/api/openai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: value })
-    });
-
-    const data = await res.json();
-    const aiText = data.result || "Merci pour votre message.";
-    const aiMessage = { from: "ia", text: `🤖 ${aiText}` };
-    setMessages((prev) => [...prev, aiMessage]);
-
-    await supabase.from("chat_messages").insert([{ role: "assistant", content: aiText }]);
+        await supabase.from("chat_messages").insert({
+          message: reply,
+          role: "assistant",
+          user_id: null,
+        });
+      }, 1000);
+    } catch (error) {
+      console.error("Erreur Supabase:", error);
+      setHistory((prev) => [...prev, "⚠️ Erreur de communication avec Davy."]);
+    }
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {!open ? (
-        <button
-          onClick={() => setOpen(true)}
-          className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700"
-        >
-          <MessageCircle size={20} />
-        </button>
-      ) : (
-        <div className="w-80 bg-white border border-gray-200 rounded-xl shadow-xl flex flex-col">
-          <div className="flex items-center justify-between bg-indigo-600 text-white p-3 rounded-t-xl">
-            <span className="font-semibold text-sm">Assistant NovaCore IA</span>
-            <button onClick={() => setOpen(false)}><X size={18} /></button>
-          </div>
+    <>
+      <button
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white rounded-full p-4 shadow-lg hover:bg-indigo-700 transition"
+      >
+        💬
+      </button>
 
-          <div
-            className="flex-1 overflow-y-auto p-3 text-sm space-y-2 text-gray-800 h-64"
-            ref={scrollRef}
-          >
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`p-2 rounded-md max-w-xs ${msg.from === "user" ? "bg-gray-100 self-end ml-auto" : "bg-indigo-50 text-indigo-700"}`}
-              >
-                {msg.text}
-              </div>
+      {open && (
+        <div className="fixed bottom-20 right-6 bg-white shadow-lg rounded-xl w-80 max-w-full z-40 border">
+          <div className="p-4 border-b font-bold text-indigo-600">Davy IA</div>
+          <div className="p-4 space-y-2 max-h-64 overflow-y-auto text-sm">
+            {history.map((msg, idx) => (
+              <p key={idx}>{msg}</p>
             ))}
           </div>
-
-          <form onSubmit={sendMessage} className="p-3 border-t">
+          <div className="flex items-center border-t p-2">
             <input
-              ref={inputRef}
               type="text"
-              placeholder="Votre question..."
-              className="w-full border px-3 py-2 text-sm rounded-md focus:outline-none focus:ring"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Message..."
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-full text-sm"
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
-          </form>
+            <button onClick={sendMessage} className="ml-2 text-sm px-3 py-2 bg-indigo-500 text-white rounded-full">
+              Envoyer
+            </button>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

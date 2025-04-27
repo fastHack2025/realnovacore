@@ -1,0 +1,24 @@
+$env:OPENAI_API_KEY = "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"
+# 🧠 NovaCore AI – Profil PowerShell personnalisé
+# Chargé automatiquement à chaque session PowerShell
+
+# 📁 Chemin projet par défaut
+Set-Location -Path "C:\Users\samuel davy\dlsolutionclean"
+
+# 🔑 Clé API OpenAI pour entraînement / fine-tune
+$env:OPENAI_API_KEY = "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"
+
+# 🛠️ Alias Dev IA OpenAI
+Set-Alias train-intents "python scripts/start-finetune.py"
+Set-Alias upload-intents "openai api files.create -f scripts/dataset-intent-training.jsonl -p fine-tune"
+
+# 🚀 Message d’accueil
+Write-Host "`n🌐 Bienvenue dans NovaCore Dev Shell — AI Hospital Commander v2035 🏥🤖`n" -ForegroundColor Cyan
+
+# ✅ Vérifie que openai est installé
+try {
+    $null = python -c "import openai"
+    Write-Host "✅ OpenAI Python SDK est prêt !" -ForegroundColor Green
+} catch {
+    Write-Host "⚠️ SDK OpenAI non détecté. Exécute: pip install openai" -ForegroundColor Red
+}

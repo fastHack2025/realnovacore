@@ -1,42 +1,51 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState } from "react";
 
 export default function PopupRDV() {
-  const [visible, setVisible] = useState(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(true)
-    }, 40000) // 40 secondes
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (!visible) return null
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center animate-fade-in">
-      <div className="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full text-center relative">
-        <button
-          onClick={() => setVisible(false)}
-          className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-lg font-bold"
-        >
-          ✕
-        </button>
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">Planifiez un rendez-vous 📅</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Notre équipe est prête à vous accompagner dans votre transformation digitale.
-        </p>
-        <button
-          onClick={() => router.push("/rdv")}
-          className="bg-violet-600 text-white px-4 py-2 rounded-full hover:bg-violet-700 transition"
-        >
-          Prendre RDV maintenant
-        </button>
-      </div>
-    </div>
-  )
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed bottom-20 right-6 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full shadow-xl z-50"
+      >
+        Planifier un appel
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white rounded-xl p-8 shadow-lg max-w-md w-full space-y-4">
+            <h3 className="text-xl font-bold text-indigo-700 mb-4">Prendre Rendez-vous</h3>
+            <form className="space-y-4">
+              <input
+                type="text"
+                placeholder="Votre nom"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <textarea
+                placeholder="Votre message"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              ></textarea>
+              <button
+                type="submit"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold"
+              >
+                Envoyer
+              </button>
+            </form>
+            <button onClick={() => setOpen(false)} className="text-gray-500 hover:text-gray-700 text-sm">
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }

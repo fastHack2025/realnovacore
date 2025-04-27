@@ -1,70 +1,50 @@
 {
   "node": {
-    "7f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947": {
+    "7f465263b946c273ce00e607900e1a23157864194e": {
       "workers": {
         "app/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/rdv/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f465263b946c273ce00e607900e1a23157864194e%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%2C%7B%22id%22%3A%227f4b8089ed2bb123ea482ff7a946bd23b59bc06e66%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fb3a869f078c7bf01862edee154703568fc1d3ab9%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/page": "rsc",
-        "app/rdv/page": "rsc"
+        "app/page": "rsc"
       }
     },
-    "7f83a09b9f7803611c77c88c52f64894c51cb84db5": {
+    "7f4b8089ed2bb123ea482ff7a946bd23b59bc06e66": {
       "workers": {
         "app/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/rdv/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f465263b946c273ce00e607900e1a23157864194e%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%2C%7B%22id%22%3A%227f4b8089ed2bb123ea482ff7a946bd23b59bc06e66%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fb3a869f078c7bf01862edee154703568fc1d3ab9%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/page": "rsc",
-        "app/rdv/page": "rsc"
+        "app/page": "rsc"
       }
     },
-    "7fe44bd014c69c070dffe9957debb9831be26cc8d0": {
+    "7fb3a869f078c7bf01862edee154703568fc1d3ab9": {
       "workers": {
         "app/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/rdv/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f6a6eccc9bf8e7d3ef5cc739059499f7bb9c5a947%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%2C%7B%22id%22%3A%227f83a09b9f7803611c77c88c52f64894c51cb84db5%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fe44bd014c69c070dffe9957debb9831be26cc8d0%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Ckeyless-actions.js%22%2C%5B%7B%22id%22%3A%227f465263b946c273ce00e607900e1a23157864194e%22%2C%22exportedName%22%3A%22deleteKeylessAction%22%7D%2C%7B%22id%22%3A%227f4b8089ed2bb123ea482ff7a946bd23b59bc06e66%22%2C%22exportedName%22%3A%22syncKeylessConfigAction%22%7D%2C%7B%22id%22%3A%227fb3a869f078c7bf01862edee154703568fc1d3ab9%22%2C%22exportedName%22%3A%22createOrReadKeylessAction%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/page": "rsc",
-        "app/rdv/page": "rsc"
+        "app/page": "rsc"
       }
     },
-    "7f40939cf8b9cdea87e68b6f2ed6cefd2d96d15270": {
+    "7fb0f61c8ece9d65ecfb9c487abb1c063f6b092f4a": {
       "workers": {
         "app/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%7B%22id%22%3A%227f40939cf8b9cdea87e68b6f2ed6cefd2d96d15270%22%2C%22exportedName%22%3A%22invalidateCacheAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/rdv/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%7B%22id%22%3A%227f40939cf8b9cdea87e68b6f2ed6cefd2d96d15270%22%2C%22exportedName%22%3A%22invalidateCacheAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CRECEPTIONPC4.STARLANDHOTEL%5C%5CCopie%20DL%20Solutions%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%7B%22id%22%3A%227fb0f61c8ece9d65ecfb9c487abb1c063f6b092f4a%22%2C%22exportedName%22%3A%22invalidateCacheAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/page": "action-browser",
-        "app/rdv/page": "action-browser"
+        "app/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "qwB4cP5Y8y7SHc4OddZFWQLemw/iVsRoYMyhQoYy5OY="
+  "encryptionKey": "I0yaozHp14HQNJjdr/NV48ix7VVEBNxfpOK1SU9Yi64="
 }

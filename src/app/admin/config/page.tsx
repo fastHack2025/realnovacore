@@ -1,58 +1,91 @@
-// ✅ src/app/admin/config/page.tsx
-
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabaseClient";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+import { AppConfig, Features, ThemeColors } from "@/lib/settings";
+import { createClient } from "@supabase/supabase-js";
 
-interface Config {
-  id: string;
-  cle: string;
-  valeur: string;
-}
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-export default function ConfigPage() {
-  const supabase = createClient();
-  const [configs, setConfigs] = useState<Config[]>([]);
+export default function AdminConfigPage() {
+  const [appName, setAppName] = useState(AppConfig.name);
+  const [baseURL, setBaseURL] = useState(AppConfig.baseURL);
+  const [features, setFeatures] = useState(Features);
+  const [theme, setTheme] = useState(ThemeColors.primary);
 
-  useEffect(() => {
-    const fetchConfigs = async () => {
-      const { data } = await supabase.from("configurations").select("*").order("cle", { ascending: true });
-      if (data) setConfigs(data);
-    };
-    fetchConfigs();
-  }, []);
+  const handleToggle = (key: keyof typeof Features) => {
+    setFeatures((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
-  const handleUpdate = async (id: string, valeur: string) => {
-    const { error } = await supabase.from("configurations").update({ valeur }).eq("id", id);
-    if (!error) toast.success("Clé mise à jour");
+  const saveToSupabase = async () => {
+    const { error } = await supabase
+      .from("config")
+      .upsert([{ id: 1, name: appName, base_url: baseURL, theme, features }]);
+
+    if (error) {
+      console.error("❌ Erreur Supabase :", error);
+      alert("❌ Sauvegarde échouée !");
+    } else {
+      alert("✅ Configuration enregistrée !");
+    }
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">⚙️ Configuration Système</h1>
+    <main className="p-6 md:p-10 bg-white text-gray-900 min-h-screen">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6">⚙️ Admin – Configuration</h1>
 
-      <Card>
-        <CardContent className="space-y-4 p-4">
-          {configs.map((config) => (
-            <div key={config.id} className="flex flex-col md:flex-row items-center gap-4">
-              <span className="font-medium w-full md:w-1/3">{config.cle}</span>
-              <Input
-                value={config.valeur}
-                onChange={(e) => {
-                  const updated = configs.map((c) => c.id === config.id ? { ...c, valeur: e.target.value } : c);
-                  setConfigs(updated);
-                }}
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <label className="font-semibold">Nom de l’app :</label>
+          <input
+            type="text"
+            className="border rounded px-3 py-2 w-full"
+            value={appName}
+            onChange={(e) => setAppName(e.target.value)}
+          />
+
+          <label className="font-semibold mt-4 block">Base URL :</label>
+          <input
+            type="text"
+            className="border rounded px-3 py-2 w-full"
+            value={baseURL}
+            onChange={(e) => setBaseURL(e.target.value)}
+          />
+
+          <label className="font-semibold mt-4 block">🎨 Couleur principale :</label>
+          <input
+            type="color"
+            className="w-16 h-10 mt-1"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-3">🧩 Modules actifs</h2>
+          {Object.entries(features).map(([key, value]) => (
+            <label key={key} className="flex items-center gap-3 mb-2">
+              <input
+                type="checkbox"
+                checked={value}
+                onChange={() => handleToggle(key as keyof typeof Features)}
               />
-              <Button onClick={() => handleUpdate(config.id, config.valeur)}>Mettre à jour</Button>
-            </div>
+              <span className="capitalize">{key.replace(/([A-Z])/g, " $1")}</span>
+            </label>
           ))}
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <button
+          onClick={saveToSupabase}
+          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        >
+          💾 Sauvegarder
+        </button>
+      </div>
+    </main>
   );
 }

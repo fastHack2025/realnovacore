@@ -28,21 +28,20 @@ export default function ChatbotDavy() {
     setMessages(newMessages);
     setInput("");
 
-    await supabase.from("davy_messages").insert({
+    await supabase.from("chat_messages").insert({
       user_id: null,
       role: "user",
-      content: userMessage,
+      message: userMessage,
     });
 
     setTimeout(async () => {
       const aiResponse = "🤖 Davy : Je suis encore en apprentissage mais je vais t'aider au mieux.";
-
       setMessages([...newMessages, aiResponse]);
 
-      await supabase.from("davy_messages").insert({
+      await supabase.from("chat_messages").insert({
         user_id: null,
         role: "assistant",
-        content: aiResponse,
+        message: aiResponse,
       });
     }, 1000);
   };
