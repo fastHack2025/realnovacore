@@ -2,38 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.dlsolutions.com/</loc>
-    <lastmod>2025-04-26</lastmod>
-    <priority>1.0</priority>
     <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.dlsolutions.com/fr</loc>
-    <lastmod>2025-04-26</lastmod>
-    <priority>0.9</priority>
+    <loc>https://www.dlsolutions.com/services</loc>
     <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.dlsolutions.com/de</loc>
-    <lastmod>2025-04-26</lastmod>
     <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.dlsolutions.com/es</loc>
-    <lastmod>2025-04-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.dlsolutions.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.dlsolutions.com/it</loc>
-    <lastmod>2025-04-26</lastmod>
-    <priority>0.8</priority>
+    <loc>https://www.dlsolutions.com/portfolio</loc>
     <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.dlsolutions.com/nl</loc>
-    <lastmod>2025-04-26</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

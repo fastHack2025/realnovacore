@@ -1,128 +1,90 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import HeroNovaCore from '@/components/HeroNovaCore';
-import HeroDL from '@/components/HeroDL';
-import ServicesSection from '@/components/ServicesSection';
-
-const NewsSection = dynamic(() => import('@/components/NewsSection'));
-const PricingGrid = dynamic(() => import('@/components/PricingGrid'));
-const ProjectsShowcase = dynamic(() => import('@/components/ProjectsShowcase'));
-const ReviewsSection = dynamic(() => import('@/components/ReviewsSection'));
-const Chatbot = dynamic(() => import('@/components/Chatbot'));
-const ReservationPopup = dynamic(() => import('@/components/ReservationPopup'));
-const VoiceAssistant = dynamic(() => import('@/components/VoiceAssistant'));
+import NewsletterPopup from '@/components/NewsletterPopup';
+import ServicesCarousel from '@/components/ServicesCarousel';
+import PricingDL from '@/components/PricingDL';
+import ReviewsSection from '@/components/ReviewsSection';
+import PortfolioGrid from '@/components/PortfolioGrid';
+import FAQSection from '@/components/FAQSection';
+import ActualitesSection from '@/components/ActualitesSection';
 
 export default function HomePage() {
   return (
-    <motion.div
-      initial="hidden"
-      animate="show"
-      variants={{
-        hidden: { opacity: 0 },
-        show: { opacity: 1, transition: { staggerChildren: 0.2 } },
-      }}
-    >
-      {/* Hero NovaCore avec fond vidéo haut de gamme */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <HeroNovaCore />
-      </motion.div>
+    <>
+      <NewsletterPopup />
 
-      {/* Hero DL Solutions pour branding ultra pro */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <HeroDL />
-      </motion.div>
+      {/* 🎥 Background vidéo DL Solutions */}
+      <div className="relative h-screen w-full overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute w-full h-full object-cover"
+          src="https://res.cloudinary.com/dko5sommz/video/upload/v1745413001/13510815_3840_2160_30fps_ilwhfm.mp4"
+        />
+        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center text-white px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-extrabold mb-4"
+          >
+            DL Solutions
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-lg md:text-2xl"
+          >
+            Communication Digitale, CRM, IA pour l'Afrique de demain
+          </motion.p>
+        </div>
+      </div>
 
-      {/* Services Section ultra fluide */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <ServicesSection />
-      </motion.div>
+      {/* 🚀 Services */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <ServicesCarousel />
+        </div>
+      </section>
 
-      {/* News Section */}
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <NewsSection />
-      </motion.div>
+      {/* 🛍️ Tarifs DL Solutions */}
+      <section className="py-24 bg-gradient-to-r from-indigo-700 to-pink-500">
+        <div className="max-w-7xl mx-auto px-6">
+          <PricingDL />
+        </div>
+      </section>
 
-      {/* Pricing Grid */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <PricingGrid />
-      </motion.div>
+      {/* 📰 Actualités */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <ActualitesSection />
+        </div>
+      </section>
 
-      {/* Projects Showcase */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <ProjectsShowcase />
-      </motion.div>
+      {/* 🏆 Avis clients */}
+      <section className="py-24 bg-gradient-to-r from-purple-700 to-indigo-500">
+        <div className="max-w-7xl mx-auto px-6">
+          <ReviewsSection />
+        </div>
+      </section>
 
-      {/* Reviews Section */}
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <ReviewsSection />
-      </motion.div>
+      {/* 🖼️ Portfolio réalisations */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <PortfolioGrid />
+        </div>
+      </section>
 
-      {/* Chatbot */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <Chatbot />
-      </motion.div>
-
-      {/* Reservation Popup */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <ReservationPopup />
-      </motion.div>
-
-      {/* Voice Assistant */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <VoiceAssistant />
-      </motion.div>
-    </motion.div>
+      {/* ❓ FAQ */}
+      <section className="py-24 bg-gradient-to-r from-indigo-700 to-pink-500">
+        <div className="max-w-7xl mx-auto px-6">
+          <FAQSection />
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,35 +1,56 @@
-// ✅ Composant final "Modules puissants NovaCore"
+'use client';
 
-import Link from "next/link";
+import { motion } from 'framer-motion';
+import { FaRobot, FaUsers, FaChartPie, FaClipboardList } from 'react-icons/fa';
 
 const modules = [
-  { label: "🧠 Assistant IA", href: "/offres" },
-  { label: "📅 Prise de rendez-vous", href: "/rdv" },
-  { label: "🎓 Formations Pro", href: "/formations" },
-  { label: "🧾 Suivi client CRM", href: "/crm" },
-  { label: "📦 Offres & Devis IA", href: "/offres/proposition/personnalisee" },
-  { label: "📊 Dashboard Admin", href: "/admin/dashboard" },
-  { label: "📑 Logs & Exports", href: "/admin/logs" },
+  {
+    title: "Module CRM",
+    description: "Gérez vos prospects, ventes et services clients avec une fluidité inégalée grâce à notre CRM intelligent NovaCore.",
+    icon: <FaUsers className="text-4xl text-indigo-400" />,
+  },
+  {
+    title: "Module ERP",
+    description: "Centralisez votre gestion d'entreprise : stocks, achats, ressources humaines et plus encore avec NovaCore ERP.",
+    icon: <FaClipboardList className="text-4xl text-indigo-400" />,
+  },
+  {
+    title: "Module IA",
+    description: "Automatisez la communication, la prospection et les réseaux sociaux grâce à notre Intelligence Artificielle propriétaire.",
+    icon: <FaRobot className="text-4xl text-indigo-400" />,
+  },
+  {
+    title: "Analytics Avancés",
+    description: "Accédez à des rapports IA pour booster votre chiffre d’affaires et vos performances en quelques clics.",
+    icon: <FaChartPie className="text-4xl text-indigo-400" />,
+  },
 ];
 
-export default function ModulesNovaCore() {
+export default function HomeModules() {
   return (
-    <section className="py-16 px-6 bg-white dark:bg-black text-gray-800 dark:text-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-10 text-center">
-          🚀 Les modules puissants de <span className="text-indigo-600">NovaCore</span>
-        </h2>
+    <motion.section
+      id="modules"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      className="py-20 bg-gradient-to-b from-black via-gray-900 to-black text-white text-center"
+    >
+      <h2 className="text-4xl font-bold mb-12">Modules NovaCore</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {modules.map((mod, i) => (
-            <Link href={mod.href} key={i}>
-              <div className="p-6 border rounded-xl shadow hover:shadow-lg hover:scale-105 transition duration-200 cursor-pointer bg-white/80 dark:bg-white/10 backdrop-blur-md">
-                <p className="text-lg font-medium text-center">{mod.label}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-6">
+        {modules.map((module, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            className="bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center"
+          >
+            {module.icon}
+            <h3 className="text-xl font-bold mt-4">{module.title}</h3>
+            <p className="text-gray-400 mt-2">{module.description}</p>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

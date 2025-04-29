@@ -1,50 +1,60 @@
-import ZoomableImage from "./ZoomableImage";
+'use client';
 
-export default function PortfolioGrid({
-  items,
-  highlight,
-}: {
-  items: any[];
-  highlight: (text: string) => any;
-}) {
+import { useEffect, useState } from "react";
+import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { motion } from "framer-motion";
+
+interface Projet {
+  id: string;
+  titre: string;
+  description: string;
+  videoUrl: string;
+}
+
+export default function PortfolioGrid() {
+  const [projets, setProjets] = useState<Projet[]>([]);
+
+  useEffect(() => {
+    const fetchProjets = async () => {
+      const snapshot = await getDocs(collection(db, "projets"));
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Projet));
+      setProjets(data);
+    };
+    fetchProjets();
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className="bg-white dark:bg-zinc-800 rounded shadow p-3 flex flex-col justify-between"
+    <section className="py-24 bg-black text-white">
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <motion.h2
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-4xl font-bold mb-12"
         >
-          <div className="mb-2">
-            {item.type === "video" ? (
+          🎥 Nos Réalisations DL Solutions
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {projets.map((item, i) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2 }}
+              className="bg-zinc-800 rounded-2xl p-6 shadow-lg"
+            >
               <video
+                src={item.videoUrl}
                 controls
-                src={item.image}
-                className="rounded w-full object-cover mb-3"
+                className="rounded-lg mb-4 w-full h-64 object-cover"
               />
-            ) : (
-              <ZoomableImage
-                src={item.image}
-                alt={item.titre}
-                className="rounded w-full object-cover mb-3"
-              />
-            )}
-            <h3 className="font-semibold text-lg mb-1">{highlight(item.titre)}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
-              {highlight(item.description)}
-            </p>
-            <p className="text-xs text-gray-400">
-              🕒 {new Date(item.date).toLocaleDateString()}
-            </p>
-          </div>
-          <a
-            href={item.lien}
-            target="_blank"
-            className="text-blue-600 dark:text-blue-400 text-sm underline"
-          >
-            🔗 Voir le projet
-          </a>
+              <h3 className="text-xl font-bold">{item.titre}</h3>
+              <p className="text-gray-300 mt-2">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 }

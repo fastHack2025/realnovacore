@@ -1,47 +1,49 @@
-// src/components/FooterDL.tsx
-import Link from "next/link";
+'use client';
+
+import Link from 'next/link';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import LogoDL from '@/components/LogoDL'; // 🌀 Logo animé DL Solutions
 
 export default function FooterDL() {
   return (
-    <footer className="bg-gray-900 text-white px-6 py-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h2 className="text-2xl font-bold mb-4">NovaCore</h2>
-          <p className="text-gray-400">
-            Votre passerelle vers l'intelligence artificielle au service des entreprises.
+    <footer className="bg-black text-white pt-16 pb-8 mt-24">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        {/* Branding + Logo */}
+        <div className="flex flex-col gap-4">
+          <LogoDL />
+          <p className="text-gray-400 text-sm max-w-sm">
+            DL Solutions SARL – Communication Digitale, CRM et IA pour booster votre succès 🚀.
           </p>
         </div>
 
+        {/* Navigation rapide */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Navigation</h3>
-          <ul className="space-y-2">
-            <li><Link href="/about" className="hover:text-indigo-400 hover:glow">À propos</Link></li>
-            <li><Link href="/services" className="hover:text-indigo-400 hover:glow">Services</Link></li>
-            <li><Link href="/contact" className="hover:text-indigo-400 hover:glow">Contact</Link></li>
+          <h3 className="text-white font-bold text-lg mb-4">Navigation</h3>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li><Link href="/">Accueil</Link></li>
+            <li><Link href="/services">Services</Link></li>
+            <li><Link href="/realisations">Réalisations</Link></li>
+            <li><Link href="/novacore">NovaCore</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
+        {/* Réseaux sociaux */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Suivez-nous</h3>
-          <div className="flex space-x-4">
-            <Link href="https://facebook.com" target="_blank">
-              <img src="/icons/facebook.svg" alt="Facebook" className="h-8 w-8 hover:glow" />
-            </Link>
-            <Link href="https://instagram.com" target="_blank">
-              <img src="/icons/instagram.svg" alt="Instagram" className="h-8 w-8 hover:glow" />
-            </Link>
-            <Link href="https://twitter.com" target="_blank">
-              <img src="/icons/twitter.svg" alt="Twitter" className="h-8 w-8 hover:glow" />
-            </Link>
-            <Link href="https://linkedin.com" target="_blank">
-              <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-8 w-8 hover:glow" />
-            </Link>
+          <h3 className="text-white font-bold text-lg mb-4">Suivez-nous</h3>
+          <div className="flex gap-4 mt-2">
+            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
+            <Link href="https://twitter.com" target="_blank"><FaTwitter /></Link>
+            <Link href="https://linkedin.com" target="_blank"><FaLinkedinIn /></Link>
+            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
           </div>
         </div>
+
       </div>
 
-      <div className="mt-10 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} NovaCore. Tous droits réservés.
+      <div className="mt-10 border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
+        © {new Date().getFullYear()} DL Solutions SARL - Tous droits réservés.
       </div>
     </footer>
   );

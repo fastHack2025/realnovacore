@@ -1,37 +1,49 @@
-"use client"
+'use client';
 
-import Image from "next/image"
+import Link from 'next/link';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import LogoDL from '@/components/LogoDL'; // On conserve le même logo tournant pour homogénéité
 
 export default function FooterNovaCore() {
   return (
-    <footer className="bg-gray-900 text-white py-10 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-        {/* Logo dans un cercle */}
-        <div className="flex items-center space-x-3">
-          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
-            <Image
-              src="https://res.cloudinary.com/dko5sommz/image/upload/v1744370550/logo-novacore_iqi2pd.png"
-              alt="Logo NovaCore"
-              width={48}
-              height={48}
-              className="object-contain"
-            />
-          </div>
-          <p className="text-xl font-bold tracking-tight">NovaCore</p>
+    <footer className="bg-zinc-900 text-gray-300 pt-12 pb-8 mt-24">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        {/* Branding NovaCore */}
+        <div className="flex flex-col gap-4">
+          <LogoDL />
+          <p className="text-gray-400 text-sm max-w-sm">
+            NovaCore CRM & ERP IA - La révolution CRM made in Africa 🌍.
+          </p>
         </div>
 
-        {/* Liens rapides */}
-        <div className="text-sm text-gray-300 flex flex-wrap gap-4 justify-center md:justify-end">
-          <a href="/novacore" className="hover:text-white">Accueil</a>
-          <a href="/novacore#modules" className="hover:text-white">Modules</a>
-          <a href="/contact" className="hover:text-white">Contact</a>
-          <a href="/politique" className="hover:text-white">Confidentialité</a>
+        {/* Accès rapide NovaCore */}
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4">NovaCore</h3>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li><Link href="/novacore">Présentation</Link></li>
+            <li><Link href="/abonnement">S'abonner</Link></li>
+            <li><Link href="/contact">Support Client</Link></li>
+            <li><Link href="/account">Mon Compte</Link></li>
+          </ul>
         </div>
+
+        {/* Réseaux sociaux */}
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4">Suivez NovaCore</h3>
+          <div className="flex gap-4 mt-2">
+            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
+            <Link href="https://twitter.com" target="_blank"><FaTwitter /></Link>
+            <Link href="https://linkedin.com" target="_blank"><FaLinkedinIn /></Link>
+            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
+          </div>
+        </div>
+
       </div>
 
-      <div className="mt-6 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Dave & Luce Solutions. Tous droits réservés.
+      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+        © {new Date().getFullYear()} NovaCore Platform - Powered by DL Solutions SARL.
       </div>
     </footer>
-  )
+  );
 }

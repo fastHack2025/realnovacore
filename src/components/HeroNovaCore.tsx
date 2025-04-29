@@ -1,41 +1,42 @@
 'use client';
 
-import React from "react";
+import { motion } from 'framer-motion';
 
 export default function HeroNovaCore() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative w-full h-screen overflow-hidden bg-black text-white flex items-center justify-center">
+
+      {/* Vidéo Background */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-60"
       >
         <source
-          src="https://res.cloudinary.com/dko5sommz/video/upload/v1744416795/page1_cfuzxw.mp4"
+          src="https://res.cloudinary.com/dko5sommz/video/upload/v1745467451/8466300-uhd_3840_2160_25fps_tcmaba.mp4"
           type="video/mp4"
         />
-        Votre navigateur ne prend pas en charge les vidéos HTML5.
       </video>
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-      <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
-        <div className="max-w-3xl mx-auto text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
-            NovaCore : La puissance de l’IA au service de votre entreprise
-          </h1>
-          <p className="text-lg md:text-xl mb-8 text-gray-300">
-            Automatisation. Performance. Intelligence. Découvrez notre suite SaaS complète.
-          </p>
-          <a
-            href="/inscription"
-            className="bg-white text-black font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-gray-200 transition duration-300"
-          >
-            Commencer maintenant
-          </a>
-        </div>
-      </div>
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+
+      {/* Contenu Texte */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 text-center px-6"
+      >
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+          NovaCore Platform
+        </h1>
+        <p className="mt-6 text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto">
+          Propulsez votre entreprise avec notre CRM, ERP, IA et solutions digitales sur mesure.
+        </p>
+      </motion.div>
     </section>
   );
 }

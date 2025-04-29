@@ -1,50 +1,44 @@
 'use client';
 
+import { motion } from 'framer-motion';
+
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black text-white">
-      {/* Background Video */}
-      <div className="absolute inset-0 -z-10">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/images/hero-placeholder.jpg"
-          className="w-full h-full object-cover"
-        >
-          <source src="/videos/background.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la vidéo HTML5.
-        </video>
-      </div>
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-black">
+      
+      {/* Video Background */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="https://res.cloudinary.com/dko5sommz/video/upload/v1745725401/v09044g40000cuub0d7og65j6kvqvbl0_kcmmqh.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80"></div>
-
-      {/* Content */}
-      <div className="relative z-10 px-6 text-center space-y-6 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight animate-fadeIn">
-          Bienvenue chez <span className="text-indigo-400">DL Solutions</span>
+      {/* Overlay content */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 text-center px-4"
+      >
+        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+          Réinventez votre Business avec NovaCore CRM IA
         </h1>
-        <p className="text-lg md:text-2xl text-gray-300 animate-fadeInUp">
-          L'innovation au service de votre réussite digitale et humaine.
+        <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">
+          DL Solutions SARL propulse votre entreprise grâce à l'intelligence artificielle, l'automatisation CRM, et la digitalisation sur-mesure.
         </p>
-        <div className="mt-8 flex justify-center gap-4">
-          <a
-            href="/contact"
-            className="btn-primary hover:glow"
-          >
-            Nous Contacter
-          </a>
-          <a
-            href="/services"
-            className="btn-secondary hover:glow"
-          >
-            Voir nos services
-          </a>
-        </div>
-      </div>
+        <a
+          href="#services"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-bold transition"
+        >
+          Découvrir nos services
+        </a>
+      </motion.div>
+
     </section>
   );
 }

@@ -1,30 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import mediumZoom from "medium-zoom";
+import { useState } from "react";
 
 interface Props {
   src: string;
-  alt?: string;
-  className?: string;
+  alt: string;
 }
 
-export default function ZoomableImage({ src, alt, className }: Props) {
-  const ref = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      mediumZoom(ref.current, { background: "#000", margin: 24 });
-    }
-  }, []);
+export default function ZoomableImage({ src, alt }: Props) {
+  const [isZoomed, setIsZoomed] = useState(false);
 
   return (
-    <img
-      ref={ref}
-      src={src}
-      alt={alt}
-      className={`cursor-zoom-in ${className}`}
-      loading="lazy"
-    />
+    <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => setIsZoomed(!isZoomed)}>
+      <img
+        src={src}
+        alt={alt}
+        className={`transition-transform duration-500 ease-in-out w-full h-60 object-cover ${isZoomed ? 'scale-150' : 'scale-100'}`}
+      />
+    </div>
   );
 }

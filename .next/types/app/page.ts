@@ -1,4 +1,4 @@
-// File: C:\copie de projet\Copie_DL_Solutions\src\app\page.tsx
+// File: C:\Users\RECEPTIONPC4.STARLANDHOTEL\version projet\Copie_DL_Solutions\src\app\page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

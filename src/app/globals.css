@@ -1,70 +1,43 @@
-/* ========== BASE ========== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 🌌 Full Page Warp & Scroll Snap */
-html, body {
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b21a8;
+  border-radius: 8px;
+}
+
+/* Font smoothing */
+html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  height: 100%;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 🌠 Snap Section Style */
-.snap-section {
-  scroll-snap-align: start;
-  min-height: 100vh;
-  height: 100vh;
+/* Body Background */
+body {
+  @apply bg-black text-white;
 }
 
-/* 🌠 Space Warp Scroll Effect */
-.warp-effect {
-  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+/* Animation Rotation Logo DL Solutions */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.warp-effect.scrolled {
-  transform: scale(0.95) rotateX(15deg) translateY(-60px);
-  opacity: 0;
-}
-
-/* 🌠 Fade-In Appear for Sections */
-.section {
-  transition: opacity 1s ease, transform 1s ease;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section-hidden {
-  opacity: 0;
-  transform: translateY(100px);
-}
-
-/* 🌠 Video Smoothing */
-video {
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-/* 🌠 Smooth Links */
-a {
-  transition: color 0.3s ease;
-}
-
-/* 🌠 Extra polish */
-* {
-  scroll-margin-top: 80px;
-}
-
-/* 🌟 Scroll Progress Bar */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  right: 10px;
-  width: 5px;
-  height: 0;
-  background: linear-gradient(to bottom, #6366f1, #3b82f6);
-  border-radius: 9999px;
-  z-index: 1000;
-  transition: height 0.2s ease-out;
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }
